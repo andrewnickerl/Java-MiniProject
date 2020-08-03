@@ -11,7 +11,7 @@ public class Mortgage {
     private float propertyTaxRate;
     private String zip;
     private double monthlyPayment;
-    private double monthlyPrincipleInterest;
+    private double monthlyPrincipalInterest;
     private double monthlyMortgageInsurance;
     private double monthlyPropertyTax;
     private double monthlyHomeOwnersInsurance;
@@ -64,12 +64,12 @@ public class Mortgage {
         this.monthlyPayment = monthlyPayment;
     }
 
-    public double getMonthlyPrincipleInterest() {
-        return monthlyPrincipleInterest;
+    public double getMonthlyPrincipalInterest() {
+        return monthlyPrincipalInterest;
     }
 
-    public void setMonthlyPrincipleInterest(double monthlyPrincipleInterest) {
-        this.monthlyPrincipleInterest = monthlyPrincipleInterest;
+    public void setMonthlyPrincipalInterest(double monthlyPrincipalInterest) {
+        this.monthlyPrincipalInterest = monthlyPrincipalInterest;
     }
 
     public double getMonthlyMortgageInsurance() {

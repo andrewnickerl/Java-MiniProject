@@ -18,6 +18,6 @@ public class MortgageCalculatorTest {
 
     @Test
     public void totalMonthlyPrice() {
-        assertTrue();
+        //assertTrue();
     }
 }
