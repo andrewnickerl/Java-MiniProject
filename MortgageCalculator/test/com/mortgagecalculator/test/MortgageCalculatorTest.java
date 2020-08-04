@@ -18,8 +18,6 @@ public class MortgageCalculatorTest {
                                          (float) .5, 12);
     }
 
-    // TODO: REMOVE REDUNDANCIES
-
     @Test
     public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() { // TODO: Waiting for math
         mortgage.setMonthlyPayment(3500.00);

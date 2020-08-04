@@ -9,7 +9,7 @@ public class MortgageCalculator {
                                                                     code/property tax API*/
         Mortgage mortgage = new Mortgage(price, downPayment, loanType, interestRate, propertyTaxRate);
         calculateMonthlyPayment(mortgage);
-        calculateMonthlyPrincipleInterest(mortgage);
+        calculateMonthlyPrincipalInterest(mortgage);
         calculateMonthlyMortgageInsurance(mortgage);
         calculateMonthlyPropertyTax(mortgage);
         calculateMonthlyHomeOwnersInsurance(mortgage);
@@ -26,7 +26,7 @@ public class MortgageCalculator {
                                                                     code/property tax API*/
         Mortgage mortgage = new Mortgage(price, downPaymentPercent * price, loanType, interestRate, propertyTaxRate);
         calculateMonthlyPayment(mortgage);
-        calculateMonthlyPrincipleInterest(mortgage);
+        calculateMonthlyPrincipalInterest(mortgage);
         calculateMonthlyMortgageInsurance(mortgage);
         calculateMonthlyPropertyTax(mortgage);
         calculateMonthlyHomeOwnersInsurance(mortgage);
@@ -36,8 +36,28 @@ public class MortgageCalculator {
 
     // example calculation method
     private static double calculateMonthlyPayment(Mortgage mortgage) {
-        double monthlyPayment = 0;
-        // calculate monthly payment
+
+        //take this and put it into calculateMonthlyPrincipalInterest() :
+        double principal = mortgage.getPrice() - mortgage.getDownPayment();
+        double interestRate = mortgage.getInterestRate();
+        double monthlyPI = principal * (interestRate * (Math.pow((1 + interestRate), 360)) /
+                (Math.pow((1 + interestRate), 360) - 1));
+
+        // take this and put it into calculateMonthlyPropertyTax() :
+        double monthlyPropertyTax = mortgage.getPrice() * mortgage.getPropertyTaxRate() / 12;
+
+        // take this and put it into calculateMonthlyMortgageInsurance() :
+        double monthlyMortgageInsurance = principal * .12 / 12;
+
+        // take this and put it into calculateMonthlyHomeOwnersInsurance() :
+        double monthlyHomeOwnersInsurance = 100; //rough monthly average based on WA state
+
+        // then, instead of the line below, do something like the comment underneath :
+        double monthlyPayment = monthlyPI + monthlyPropertyTax + monthlyMortgageInsurance + monthlyHomeOwnersInsurance;
+        /* double monthlyPayment = calculateMonthlyPrincipalInterest(mortgage) + calculateMonthlyMortgageInsurance(mortgage)
+                +  calculateMonthlyPropertyTax(mortgage) + calculateMonthlyHomeOwnersInsurance(mortgage);
+         */
+
         mortgage.setMonthlyPayment(monthlyPayment);
         return monthlyPayment;
     }
@@ -48,32 +68,19 @@ public class MortgageCalculator {
         return 0.0;
     }
 
-    private static double calculateMonthlyPrincipleInterest(Mortgage mortgage) {
-        double principal = mortgage.getPrice() - mortgage.getDownPayment();
-        double interestRate = mortgage.getInterestRate();
-        double interestRateDecimal = interestRate / 100;
-        double monthlyInterestRate = interestRateDecimal / 12;
-        double monthlyPI = principal * (monthlyInterestRate * (Math.pow((1 + monthlyInterestRate), 360)) / (Math.pow((1 + monthlyInterestRate), 360) - 1));
-        mortgage.setMonthlyPrincipalInterest(monthlyPI);
-        return monthlyPI;
+    private static double calculateMonthlyPrincipalInterest(Mortgage mortgage) {
+        return 0.0;
     }
 
     private static double calculateMonthlyMortgageInsurance(Mortgage mortgage) {
-        double principal = mortgage.getPrice() - mortgage.getDownPayment();
-        double monthlyMortgageInsurance = principal * .12 / 12;
-        mortgage.setMonthlyMortgageInsurance(monthlyMortgageInsurance);
-        return monthlyMortgageInsurance;
+        return 0.0;
     }
 
     private static double calculateMonthlyPropertyTax(Mortgage mortgage) {
-        double monthlyPropertyTax = mortgage.getPrice() * mortgage.getPropertyTaxRate() / 12;
-        mortgage.setMonthlyPropertyTax(monthlyPropertyTax);
-        return monthlyPropertyTax;
+        return 0.0;
     }
 
     private static double calculateMonthlyHomeOwnersInsurance(Mortgage mortgage) {
-        double monthlyHomeOwnersInsurance = 100;
-        mortgage.setMonthlyHomeOwnersInsurance(monthlyHomeOwnersInsurance);
-        return monthlyHomeOwnersInsurance;
+        return 0.0;
     }
 }
