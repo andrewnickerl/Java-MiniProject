@@ -47,7 +47,7 @@ public class MortgageCalculator {
     // IF WE AREN'T GOING TO ADD THAT, WE CAN DELETE THIS METHOD
     private static double calculateMonthlyPropertyTaxRate(Mortgage mortgage) {
         double monthlyPropertyTaxRate = mortgage.getPropertyTaxRate() / 12;
-        // TODO
+        mortgage.setMonthlyPropertyTax(monthlyPropertyTaxRate);
         return monthlyPropertyTaxRate;
     }
 
@@ -64,20 +64,21 @@ public class MortgageCalculator {
 
     private static double calculateMonthlyMortgageInsurance(Mortgage mortgage) {
         double principal = mortgage.getPrice() - mortgage.getDownPayment();
-        double monthlyMortgageInsurance = principal * .12 / 12;
+        double monthlyMortgageInsurance = principal * .012 / 12;
         mortgage.setMonthlyMortgageInsurance(monthlyMortgageInsurance);
         return monthlyMortgageInsurance;
     }
 
     private static double calculateMonthlyPropertyTax(Mortgage mortgage) {
-        double monthlyPropertyTax = mortgage.getPrice() * mortgage.getPropertyTaxRate() / 12;
+        double propertyTaxDecimal = mortgage.getPropertyTaxRate() / 100;
+        double monthlyPropertyTax = mortgage.getPrice() * propertyTaxDecimal / 12;
         mortgage.setMonthlyPropertyTax(monthlyPropertyTax);
         return monthlyPropertyTax;
     }
 
     private static double calculateMonthlyHomeOwnersInsurance(Mortgage mortgage) {
         double monthlyHomeOwnersInsurance = 100; //rough monthly average based on WA state
-        mortgage.setMonthlyPayment(monthlyHomeOwnersInsurance);
+        mortgage.setMonthlyHomeOwnersInsurance(monthlyHomeOwnersInsurance);
         return monthlyHomeOwnersInsurance;
     }
 }

@@ -9,38 +9,40 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MortgageCalculatorTest {
+public class MortgageCalculatorTest extends MortgageCalculator {
     Mortgage mortgage = null;
 
     @Before
     public void setUp() {
-        mortgage = new Mortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
+        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
                                          (float) 3.5, (float) .953);
+
     }
 
     @Test
     public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() { // TODO: Waiting for math
-        assertEquals(3500.00, mortgage.getMonthlyPayment(), .001);
+        assertEquals(1247.113, mortgage.getMonthlyPayment(), .001);
     }
 
     @Test
     public void getMonthlyPrincipalInterest_shouldReturnMonthlyPrincipalInterest() { // TODO: Waiting for math
-        assertEquals(2.5, mortgage.getMonthlyPrincipalInterest(), .001);
+
+        assertEquals(808.28, mortgage.getMonthlyPrincipalInterest(), .001);
     }
 
     @Test
     public void getMonthlyMortgageInsurance_shouldReturnMonthlyMortgageInsurance() { // TODO: Waiting for math
-        assertEquals(1000.00, mortgage.getMonthlyMortgageInsurance(), .001);
+        assertEquals(180, mortgage.getMonthlyMortgageInsurance(), .001);
     }
 
     @Test
     public void getMonthlyPropertyTax_shouldReturnMonthlyPropertyTax() { // TODO: Waiting for math
-        assertEquals(250.00, mortgage.getMonthlyPropertyTax(), .001);
+        assertEquals(158.833, mortgage.getMonthlyPropertyTax(), .001);
     }
 
     @Test
     public void getMonthlyHomeOwnersInsurance_shouldReturnMonthlyHomeOwnersInsurance() { // TODO: Waiting for math
-        assertEquals(250.00, mortgage.getMonthlyHomeOwnersInsurance(), .001);
+        assertEquals(100, mortgage.getMonthlyHomeOwnersInsurance(), .001);
     }
 
     @Test
@@ -60,11 +62,11 @@ public class MortgageCalculatorTest {
 
     @Test
     public void getInterestRate_shouldReturnInterestRate() {
-        assertEquals(.5, mortgage.getInterestRate(), .001);
+        assertEquals(3.5, mortgage.getInterestRate(), .001);
     }
 
     @Test
     public void getPropertyTaxRate_shouldReturnPropertyTaxRate() {
-        assertEquals(12, mortgage.getPropertyTaxRate(), .001);
+        assertEquals(.953, mortgage.getPropertyTaxRate(), .001);
     }
 }
