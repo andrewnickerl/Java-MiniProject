@@ -51,22 +51,29 @@ public class MortgageCalculator {
     private static double calculateMonthlyPrincipleInterest(Mortgage mortgage) {
         double principal = mortgage.getPrice() - mortgage.getDownPayment();
         double interestRate = mortgage.getInterestRate();
-        double monthlyPI = principal * (interestRate * (Math.pow((1 + interestRate), 360)) / (Math.pow((1 + interestRate), 360) - 1));
-        return 0.0;
+        double interestRateDecimal = interestRate / 100;
+        double monthlyInterestRate = interestRateDecimal / 12;
+        double monthlyPI = principal * (monthlyInterestRate * (Math.pow((1 + monthlyInterestRate), 360)) / (Math.pow((1 + monthlyInterestRate), 360) - 1));
+        mortgage.setMonthlyPrincipalInterest(monthlyPI);
+        return monthlyPI;
     }
 
     private static double calculateMonthlyMortgageInsurance(Mortgage mortgage) {
+        double principal = mortgage.getPrice() - mortgage.getDownPayment();
         double monthlyMortgageInsurance = principal * .12 / 12;
-        return 0.0;
+        mortgage.setMonthlyMortgageInsurance(monthlyMortgageInsurance);
+        return monthlyMortgageInsurance;
     }
 
     private static double calculateMonthlyPropertyTax(Mortgage mortgage) {
         double monthlyPropertyTax = mortgage.getPrice() * mortgage.getPropertyTaxRate() / 12;
-        return 0.0;
+        mortgage.setMonthlyPropertyTax(monthlyPropertyTax);
+        return monthlyPropertyTax;
     }
 
     private static double calculateMonthlyHomeOwnersInsurance(Mortgage mortgage) {
         double monthlyHomeOwnersInsurance = 100;
-        return 0.0;
+        mortgage.setMonthlyHomeOwnersInsurance(monthlyHomeOwnersInsurance);
+        return monthlyHomeOwnersInsurance;
     }
 }
