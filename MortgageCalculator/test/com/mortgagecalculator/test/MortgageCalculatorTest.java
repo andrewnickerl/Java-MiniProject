@@ -9,13 +9,15 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MortgageCalculatorTest extends MortgageCalculator {
+public class MortgageCalculatorTest {
 
     @Before
     public void setUp() {
         Mortgage mortgage = new Mortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
                                          (float) .5, 12);
     }
+
+    // TODO: REMOVE REDUNDANCIES
 
     @Test
     public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() { // TODO: Waiting for math
@@ -26,11 +28,11 @@ public class MortgageCalculatorTest extends MortgageCalculator {
     }
 
     @Test
-    public void getMonthlyPrincipleInterest_shouldReturnMonthlyPrincipleInterest() { // TODO: Waiting for math
+    public void getMonthlyPrincipalInterest_shouldReturnMonthlyPrincipalInterest() { // TODO: Waiting for math
         Mortgage mortgage = new Mortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
                                             (float) .5, 12);
-        mortgage.setMonthlyPrincipleInterest(2.5);
-        assertEquals(2.5, mortgage.getMonthlyPrincipleInterest(), .001);
+        mortgage.setMonthlyPrincipalInterest(2.5);
+        assertEquals(2.5, mortgage.getMonthlyPrincipalInterest(), .001);
     }
 
     @Test
