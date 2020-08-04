@@ -15,36 +15,31 @@ public class MortgageCalculatorTest {
     @Before
     public void setUp() {
         mortgage = new Mortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
-                                         (float) .5, 12);
+                                         (float) 3.5, (float) .953);
     }
 
     @Test
     public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() { // TODO: Waiting for math
-        mortgage.setMonthlyPayment(3500.00);
         assertEquals(3500.00, mortgage.getMonthlyPayment(), .001);
     }
 
     @Test
     public void getMonthlyPrincipalInterest_shouldReturnMonthlyPrincipalInterest() { // TODO: Waiting for math
-        mortgage.setMonthlyPrincipalInterest(2.5);
         assertEquals(2.5, mortgage.getMonthlyPrincipalInterest(), .001);
     }
 
     @Test
     public void getMonthlyMortgageInsurance_shouldReturnMonthlyMortgageInsurance() { // TODO: Waiting for math
-        mortgage.setMonthlyMortgageInsurance(1000.00);
         assertEquals(1000.00, mortgage.getMonthlyMortgageInsurance(), .001);
     }
 
     @Test
     public void getMonthlyPropertyTax_shouldReturnMonthlyPropertyTax() { // TODO: Waiting for math
-        mortgage.setMonthlyPropertyTax(250.00);
         assertEquals(250.00, mortgage.getMonthlyPropertyTax(), .001);
     }
 
     @Test
     public void getMonthlyHomeOwnersInsurance_shouldReturnMonthlyHomeOwnersInsurance() { // TODO: Waiting for math
-        mortgage.setMonthlyHomeOwnersInsurance(250.00);
         assertEquals(250.00, mortgage.getMonthlyHomeOwnersInsurance(), .001);
     }
 
