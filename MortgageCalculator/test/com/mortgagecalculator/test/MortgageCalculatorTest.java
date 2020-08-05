@@ -5,7 +5,8 @@ import com.mortgagecalculator.MortgageCalculator;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MortgageCalculatorTest extends MortgageCalculator {
     Mortgage mortgage = null;
@@ -18,37 +19,28 @@ public class MortgageCalculatorTest extends MortgageCalculator {
     }
 
     @Test
-    public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() {
+    public void getTotalMonthlyPayment_shouldReturnTotalMonthlyPayment() { // TODO: Waiting for math
         assertEquals(1247.113, mortgage.getMonthlyPayment(), .001);
     }
 
     @Test
-    public void getMonthlyPrincipalInterest_shouldReturnMonthlyPrincipalInterest() {
+    public void getMonthlyPrincipalInterest_shouldReturnMonthlyPrincipalInterest() { // TODO: Waiting for math
 
         assertEquals(808.28, mortgage.getMonthlyPrincipalInterest(), .001);
     }
 
     @Test
-    public void getMonthlyMortgageInsurance_shouldReturnMonthlyMortgageInsurance() {
-        assertFalse(mortgage.isVaLoan());
+    public void getMonthlyMortgageInsurance_shouldReturnMonthlyMortgageInsurance() { // TODO: Waiting for math
         assertEquals(180, mortgage.getMonthlyMortgageInsurance(), .001);
     }
 
     @Test
-    public void getMonthlyMortgageInsurance_shouldReturnZeroMonthlyMortgageInsurance() {
-        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, 15,
-                (float) 3.5, (float) .953, true);
-        assertTrue( mortgage.isVaLoan());
-        assertEquals(0.0, mortgage.getMonthlyMortgageInsurance(), .001);
-    }
-
-    @Test
-    public void getMonthlyPropertyTax_shouldReturnMonthlyPropertyTax() {
+    public void getMonthlyPropertyTax_shouldReturnMonthlyPropertyTax() { // TODO: Waiting for math
         assertEquals(158.833, mortgage.getMonthlyPropertyTax(), .001);
     }
 
     @Test
-    public void getMonthlyHomeOwnersInsurance_shouldReturnMonthlyHomeOwnersInsurance() {
+    public void getMonthlyHomeOwnersInsurance_shouldReturnMonthlyHomeOwnersInsurance() { // TODO: Waiting for math
         assertEquals(100, mortgage.getMonthlyHomeOwnersInsurance(), .001);
     }
 
