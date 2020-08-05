@@ -18,7 +18,7 @@ public class CalculatorUI {
         calculatorPanel.setLayout(null);
 
         JLabel title = new JLabel("Mortgage Calculator");
-        title.setBounds(180, 1, 150, 25);
+        title.setBounds(180, 0, 150, 25);
         calculatorPanel.add(title);
 
         JLabel price = new JLabel("Price:");
@@ -27,6 +27,13 @@ public class CalculatorUI {
         JTextField priceText = new JTextField();
         priceText.setBounds(50, 40, 80, 20);
         calculatorPanel.add(priceText);
+
+        JLabel downPayment = new JLabel("Down Payment:");
+        price.setBounds(10, 80, 50, 20);
+        calculatorPanel.add(downPayment);
+        JTextField downPaymentText = new JTextField();
+        priceText.setBounds(50, 80, 80, 20);
+        calculatorPanel.add(downPaymentText);
 
         // double priceArg = Double.parseDouble(priceText.getText());
 
