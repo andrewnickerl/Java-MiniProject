@@ -39,8 +39,8 @@ public class MortgageCalculator {
 
     // example calculation method
     private static double calculateMonthlyPayment(Mortgage mortgage) {
-        double monthlyPayment = calculateMonthlyPrincipalInterest(mortgage) + calculateMonthlyMortgageInsurance(mortgage)
-                +  calculateMonthlyPropertyTax(mortgage) + calculateMonthlyHomeOwnersInsurance(mortgage);
+        double monthlyPayment = (calculateMonthlyPrincipalInterest(mortgage) + calculateMonthlyMortgageInsurance(mortgage)
+                +  calculateMonthlyPropertyTax(mortgage) + calculateMonthlyHomeOwnersInsurance(mortgage));
         mortgage.setMonthlyPayment(monthlyPayment);
         return monthlyPayment;
     }
