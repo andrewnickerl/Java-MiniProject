@@ -1,6 +1,5 @@
 package com.mortgagecalculator.test;
 
-import com.mortgagecalculator.LoanType;
 import com.mortgagecalculator.Mortgage;
 import com.mortgagecalculator.MortgageCalculator;
 import org.junit.Before;
@@ -14,8 +13,8 @@ public class MortgageCalculatorTest extends MortgageCalculator {
 
     @Before
     public void setUp() {
-        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, LoanType.CONVENTIONAL15,
-                                         (float) 3.5, (float) .953);
+        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, 15,
+                                         (float) 3.5, (float) .953, false);
 
     }
 
@@ -56,9 +55,7 @@ public class MortgageCalculatorTest extends MortgageCalculator {
     }
 
     @Test
-    public void getLoanType_shouldReturnLoanType() {
-        assertTrue(mortgage.getLoanType() == LoanType.CONVENTIONAL15);
-    }
+    public void getLoanLength_shouldReturnLoanLength() { assertTrue(mortgage.getLoanLength() == 15); }
 
     @Test
     public void getInterestRate_shouldReturnInterestRate() {
