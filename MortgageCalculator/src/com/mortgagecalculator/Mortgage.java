@@ -6,9 +6,10 @@ public class Mortgage {
 
     private double price;
     private double downPayment;
-    private LoanType loanType;
+    private int loanLength;
     private float interestRate;
     private float propertyTaxRate;
+    private boolean isVaLoan;
     private String zip;
     private double monthlyPayment;
     private double monthlyPrincipalInterest;
@@ -18,13 +19,14 @@ public class Mortgage {
 
     // CTOR
     public Mortgage(double price, double downPayment,
-                    LoanType loanType, float interestRate,
-                    float propertyTaxRate) {
+                    int loanLength, float interestRate,
+                    float propertyTaxRate, boolean isVaLoan) {
         this.price = price;
         this.downPayment = downPayment;
-        this.loanType = loanType;
+        this.loanLength = loanLength;
         this.interestRate = interestRate;
         this.propertyTaxRate = propertyTaxRate;
+        this.isVaLoan = isVaLoan;
     }
 
     // ACCESSORS
@@ -38,9 +40,7 @@ public class Mortgage {
         return downPayment;
     }
 
-    public LoanType getLoanType() {
-        return loanType;
-    }
+    public int getLoanLength() { return loanLength; }
 
     public float getInterestRate() {
         return interestRate;
@@ -49,6 +49,8 @@ public class Mortgage {
     public float getPropertyTaxRate() {
         return propertyTaxRate;
     }
+
+    public boolean isVaLoan() { return isVaLoan; }
 
     // WE'LL IGNORE ZIP FOR NOW
     public String getZip() {
