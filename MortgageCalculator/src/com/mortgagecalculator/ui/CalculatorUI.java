@@ -141,11 +141,11 @@ public class CalculatorUI implements  Runnable {
                 Mortgage mortgage = MortgageCalculator.getMortgage(price, downPayment, loanLength, interestRate,
                         propertyTaxRate, isVaLoan);
 
-                monthlyPaymentText.setText(Double.toString(mortgage.getMonthlyPayment()));
-                monthlyPIText.setText(Double.toString(mortgage.getMonthlyPrincipalInterest()));
-                monthlyPropertyTaxText.setText(Double.toString(mortgage.getMonthlyPropertyTax()));
-                monthlyHomeOwnersInsuranceText.setText(Double.toString(mortgage.getMonthlyHomeOwnersInsurance()));
-                monthlyMortgageInsuranceText.setText(Double.toString(mortgage.getMonthlyMortgageInsurance()));
+                monthlyPaymentText.setText(String.format("%.2f", mortgage.getMonthlyPayment()));
+                monthlyPIText.setText(String.format("%.2f", mortgage.getMonthlyPrincipalInterest()));
+                monthlyPropertyTaxText.setText(String.format("%.2f", mortgage.getMonthlyPropertyTax()));
+                monthlyHomeOwnersInsuranceText.setText(String.format("%.2f", mortgage.getMonthlyHomeOwnersInsurance()));
+                monthlyMortgageInsuranceText.setText(String.format("%.2f", mortgage.getMonthlyMortgageInsurance()));
             }
         };
         calculateButton.addActionListener(handler);
