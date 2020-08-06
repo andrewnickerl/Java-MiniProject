@@ -12,8 +12,8 @@ public class MortgageCalculatorTest extends MortgageCalculator {
 
     @Before
     public void setUp() {
-        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, 15,
-                                         (float) 3.5, (float) .953, false);
+        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, false,
+                                                    15, (float) 3.5, (float) .953, false);
 
     }
 
@@ -36,8 +36,8 @@ public class MortgageCalculatorTest extends MortgageCalculator {
 
     @Test
     public void getMonthlyMortgageInsurance_shouldReturnZeroMonthlyMortgageInsurance() {
-        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, 15,
-                (float) 3.5, (float) .953, true);
+        mortgage = MortgageCalculator.getMortgage(200000.00, 20000.00, false,
+                                                    15, (float) 3.5, (float) .953, true);
         assertTrue( mortgage.isVaLoan());
         assertEquals(0.0, mortgage.getMonthlyMortgageInsurance(), .001);
     }

@@ -8,14 +8,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CalculatorUI implements  Runnable {
+public class CalculatorUI {
 
-    @Override
-    public void run() {
+    public void show() {
         // INITIAL PANEL AND FRAME SETUP FOR THE UI
         JPanel calculatorPanel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(500, 450);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(calculatorPanel);
         calculatorPanel.setLayout(null);
@@ -40,6 +40,14 @@ public class CalculatorUI implements  Runnable {
         JTextField downPaymentText = new JTextField();
         downPaymentText.setBounds(125, 90, 80, 20);
         calculatorPanel.add(downPaymentText);
+
+        // SETS LABEL AND CHECK BOX FOR DOWN PAYMENT PERCENT
+        JLabel dpPercent = new JLabel("%");
+        dpPercent.setBounds(230, 90, 20, 20);
+        calculatorPanel.add(dpPercent);
+        JCheckBox downPaymentPercentBox = new JCheckBox();
+        downPaymentPercentBox.setBounds(210, 90, 20, 20);
+        calculatorPanel.add(downPaymentPercentBox);
 
         // SETS LABEL AND DROP DOWN MENU FOR LOAN LENGTH
         JLabel loanLength = new JLabel("Loan Length:");
@@ -133,12 +141,13 @@ public class CalculatorUI implements  Runnable {
             public void actionPerformed(ActionEvent e) {
                 double price = Double.parseDouble(priceText.getText());
                 double downPayment = Double.parseDouble(downPaymentText.getText());
+                boolean isDownPaymentPercent = downPaymentPercentBox.isSelected();
                 int loanLength = (int)loanLengthsBox.getSelectedItem();
                 float interestRate = Float.parseFloat(interestRateText.getText());
                 float propertyTaxRate = Float.parseFloat(propertyTaxRateText.getText());
                 boolean isVaLoan = vaLoanBox.isSelected();
 
-                Mortgage mortgage = MortgageCalculator.getMortgage(price, downPayment, loanLength, interestRate,
+                Mortgage mortgage = MortgageCalculator.getMortgage(price, downPayment, isDownPaymentPercent, loanLength, interestRate,
                         propertyTaxRate, isVaLoan);
 
                 monthlyPaymentText.setText(String.format("%.2f", mortgage.getMonthlyPayment()));
@@ -150,6 +159,36 @@ public class CalculatorUI implements  Runnable {
         };
         calculateButton.addActionListener(handler);
         calculatorPanel.add(calculateButton);
+
+        JButton resetButton = new JButton("RESET");
+        resetButton.setBounds(200, 222, 80, 16);
+        ActionListener reset = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double price = 0.0;
+                double downPayment = 0.0;
+                boolean isDownPaymentPercent =! downPaymentPercentBox.isSelected();
+                int loanLength = 0;
+                float interestRate = 0;
+                float propertyTaxRate = 0;
+                boolean isVaLoan =! vaLoanBox.isSelected();
+
+                monthlyPaymentText.setText("");
+                monthlyPIText.setText("");
+                monthlyPropertyTaxText.setText("");
+                monthlyHomeOwnersInsuranceText.setText("");
+                monthlyMortgageInsuranceText.setText("");
+
+                priceText.setText("");
+                downPaymentText.setText("");
+                interestRateText.setText("");
+                propertyTaxRateText.setText("");
+                vaLoanBox.setSelected(false);
+                downPaymentPercentBox.setSelected(false);
+            }
+        };
+        resetButton.addActionListener(reset);
+        calculatorPanel.add(resetButton);
 
         frame.setVisible(true);
     }

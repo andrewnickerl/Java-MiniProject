@@ -2,13 +2,15 @@ package com.mortgagecalculator;
 
 public class MortgageCalculator {
     public static Mortgage getMortgage(double price, double downPayment,
-                                       int loanLength, float interestRate,
-                                       float propertyTaxRate, boolean isVaLoan) {
+                                       boolean isDownPaymentPercent, int loanLength,
+                                       double interestRate, double propertyTaxRate,
+                                       boolean isVaLoan) {
                                                                     /*I'm including property tax rate as an
                                                                     argument instead of zip until we can
                                                                     figure out how to implement a ZIP
                                                                     code/property tax API*/
-        Mortgage mortgage = new Mortgage(price, downPayment, loanLength, interestRate, propertyTaxRate, isVaLoan);
+        Mortgage mortgage = new Mortgage(price, downPayment, isDownPaymentPercent, loanLength, interestRate, propertyTaxRate, isVaLoan);
+        calculateDownPayment(mortgage);
         calculateMonthlyPayment(mortgage);
         calculateMonthlyPrincipalInterest(mortgage);
         calculateMonthlyMortgageInsurance(mortgage);
@@ -18,26 +20,18 @@ public class MortgageCalculator {
         return mortgage;
     }
 
-    // OVERLOADED GETMORTGAGE TO ALLOW PASSING A DOWN PAYMENT PERCENT AS WELL AS THE RAW DOLLAR FIGURE (ABOVE)
-    public static Mortgage getMortgage(double price, float downPaymentPercent,
-                                       int loanLength, float interestRate,
-                                       float propertyTaxRate, boolean isVaLoan) {
-                                                                    /*I'm including property tax rate as an
-                                                                    argument instead of zip until we can
-                                                                    figure out how to implement a ZIP
-                                                                    code/property tax API*/
-        Mortgage mortgage = new Mortgage(price, downPaymentPercent * price,
-                loanLength, interestRate, propertyTaxRate, isVaLoan);
-        calculateMonthlyPayment(mortgage);
-        calculateMonthlyPrincipalInterest(mortgage);
-        calculateMonthlyMortgageInsurance(mortgage);
-        calculateMonthlyPropertyTax(mortgage);
-        calculateMonthlyHomeOwnersInsurance(mortgage);
-
-        return mortgage;
+    private static double calculateDownPayment(Mortgage mortgage) {
+        double downPayment;
+        if (mortgage.isDownPaymentPercent()) {
+            downPayment = (mortgage.getDownPayment() / 100) * mortgage.getPrice();
+        }
+        else {
+            downPayment = mortgage.getDownPayment();
+        }
+        mortgage.setDownPayment(downPayment);
+        return downPayment;
     }
 
-    // example calculation method
     private static double calculateMonthlyPayment(Mortgage mortgage) {
         double monthlyPayment = (calculateMonthlyPrincipalInterest(mortgage) + calculateMonthlyMortgageInsurance(mortgage)
                 +  calculateMonthlyPropertyTax(mortgage) + calculateMonthlyHomeOwnersInsurance(mortgage));
